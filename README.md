@@ -13,11 +13,21 @@ uv sync
 ## Usage
 
 ```bash
-# Output to stdout
+# Convert single PDF (saves to <input_dir>/converted/<name>.md)
 uv run python digitize.py input.pdf
 
-# Save to file
+# Convert all PDFs in a folder (saves to <folder>/converted/)
+uv run python digitize.py ./invoices/
+
+# Save to specific file or directory
 uv run python digitize.py input.pdf -o output.md
+uv run python digitize.py ./invoices/ -o ./output/
+
+# Overwrite existing files without asking
+uv run python digitize.py ./invoices/ -y
+
+# Output to stdout (single PDF only)
+uv run python digitize.py input.pdf --stdout
 
 # Plain text output (strips markdown formatting)
 uv run python digitize.py input.pdf --format text
@@ -27,5 +37,6 @@ uv run python digitize.py input.pdf --format text
 
 - Converts scanned PDFs to clean markdown
 - Handles complex layouts (tables, multi-column)
+- Batch conversion with skip/overwrite options for existing files
 - Works on CPU or GPU (GPU is faster)
 - Ideal for preparing documents for LLM processing
